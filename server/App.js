@@ -24,5 +24,6 @@ app.use(bodyParser.json());
 
 //Routes
 app.use('/api/signUp', require('./router/signUp'));
+app.use('/api/signIn',require('./router/signIn'));
 
 module.exports=app;
