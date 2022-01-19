@@ -13,6 +13,9 @@ class SignIn extends React.Component{
         this.state = {
           email: '',
           password: '',
+          token:''
+          // we have to use that same token store it in our local storage
+          //  and send it along with request to the server
          }
     
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -27,7 +30,16 @@ class SignIn extends React.Component{
             email: this.state.email,
             password: this.state.password
           }).then(res => {
-            console.log(res);
+            this.setState({
+
+              // now we have recieved yhe token noe we have to store it in local storage
+              token:res.data.token
+            });
+            const data={
+              token: this.state.token,
+              time: new Date().getTime()
+            }
+            localStorage.setItem('userTokenTime',JSON.stringify(data));
             
           }).catch(err => {
             console.log(err);
