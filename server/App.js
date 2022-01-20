@@ -36,6 +36,7 @@ app.use('/api/signIn',require('./router/signIn'));
 // check that whether a token is present or not...
 // if its not then error will be there
 app.use('/api/upload', checkAuth, require('./router/upload'));
+app.use('/api/videoList', checkAuth, require('./router/videoList'));
 
 
 

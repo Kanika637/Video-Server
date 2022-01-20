@@ -4,12 +4,11 @@ const { createWriteStream } = require('fs');
 const VideoDetails = require('../models/VideoDetails');
 const port = require('../configs/default').port;
 
-const ffmpegPath = 'C:\Program Files\ffmpeg-2022-01-19-git-dd17c86aa1-full_build\ffmpeg-2022-01-19-git-dd17c86aa1-full_build\bin';
+const ffmpegPath = 'C:\ffmpeg';
 const width = 256;
 const height = 144;
 
 const generateThumbnail = (target, title, username) => {
-    // rplacing the title with nothing
   title = title.replace(/.mov|.mpg|.mpeg|.mp4|.wmv|.avi/gi, '');
   let tmpFile = createWriteStream('media/uploads/video_thumbnails/' + title + '.jpg');
   const ffmpeg = spawn(ffmpegPath, [
@@ -30,15 +29,13 @@ const generateThumbnail = (target, title, username) => {
     'pipe:1'
   ]);
   ffmpeg.stdout.pipe(tmpFile);
-//   saving data into our database using the schema that we created before
   const videoDetails = new VideoDetails({
+    //saving deatils into the database
     uploader_name: username,
     upload_title: title,
     video_path: target,
-    // saving also the url in database
     thumbnail_path: 'http://127.0.0.1:' + port + '/api/videos/video_thumbnails/' + encodeURIComponent(title + '.jpg')
   });
-//   saving th details into database 
   videoDetails
     .save()
     .then(result => {
