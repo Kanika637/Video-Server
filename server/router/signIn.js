@@ -27,17 +27,17 @@ router.post('/', (req,res,next)=>{
                 });
             }
             if(result){
-                // I think creating tokens here
+                // creating tokens here
                 const token= jwt.sign({
                     userId:user[0]._id,
                     firstName:user[0].firstName,
                     lastName:user[0].lastName,
                     email:user[0].email
                 }, require('../configs/default').secret_key,{
-                    expiresIn:'1h'
+                    expiresIn:'1d'
                 
                 });
-            //password found matching we will generate tokens later
+            //password found matching we will generate tokens here
 
                 return res.status(200).json({
                     message:"Auth successful",
