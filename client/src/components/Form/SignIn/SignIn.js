@@ -30,9 +30,10 @@ class SignIn extends React.Component{
             email: this.state.email,
             password: this.state.password
           }).then(res => {
+            console.log(res);
             this.setState({
 
-              // now we have recieved yhe token noe we have to store it in local storage
+              // now we have recieved the token noe we have to store it in local storage
               token:res.data.token
             });
             const data={

@@ -5,7 +5,8 @@ const cors=require('cors');
 const bodyParser = require("body-parser");
 const mongoose=require('mongoose');
 
-const checkAuth= require('./middlewares/check-auth')
+const checkAuth = require("./middlewares/check-auth");
+
 
 mongoose.connect('mongodb://127.0.0.1/videoServer',{
     // useCreateIndex: true,
@@ -34,7 +35,7 @@ app.use('/api/signIn',require('./router/signIn'));
 //whenevr a user uploads a video it will 
 // check that whether a token is present or not...
 // if its not then error will be there
-app.use('/api/upload', checkAuth , require('./router/upload'));
+app.use('/api/upload', checkAuth, require('./router/upload'));
 
 
 
